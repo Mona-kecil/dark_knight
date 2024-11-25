@@ -11,6 +11,10 @@ public class Main {
     return scan.nextLine();
   }
 
+  private void clear_screen() {
+    System.out.print("\033[H\033[2J");
+  }
+
   private void displayEntity(Entity entity) {
     if (entity instanceof Player) {
       System.out.println("Player: " + ((Player) entity).name);
@@ -69,6 +73,7 @@ public class Main {
     System.out.println("Welcome to Dark Knight, " + name);
     System.out.println("Press enter to continue");
     scan.nextLine();
+    clear_screen();
     return player;
   }
 
@@ -82,8 +87,39 @@ public class Main {
       displayEntity(enemy);
       System.out.println("------------------");
 
-      player.attack();
-      enemy.attack();
+      int player_damage = player.attack();
+      int enemy_damage = enemy.attack();
+
+      player.take_damage(enemy_damage);
+      enemy.take_damage(player_damage);
+
+      if (enemy instanceof Thief && player.has_item()) {
+        if (Math.random() < 0.25) {
+          ((Thief) enemy).steal_weapon(player);
+        }
+      }
+
+      if (player.hp <= 0) {
+        System.out.println("You died...");
+        System.out.println("Adios");
+        System.exit(0);
+      }
+
+      if (enemy.hp <= 0) {
+        System.out.println("Congratulations, you have defeated the " + enemy.getClass().getSimpleName());
+        if (Math.random() < 0.25) {
+          Item item = ItemFactory.createItem();
+          System.out.println("You obtained " + item.getName());
+          player.set_item(item);
+        }
+
+        player.reset_hp();
+        enemy = EnemyFactory.createEnemy();
+      }
+
+      System.out.println("Press enter to continue");
+      scan.nextLine();
+      clear_screen();
     }
 
   }

@@ -50,6 +50,14 @@ public class Player implements Entity {
         this.hp = hp;
     }
 
+    public void reset_hp() {
+        if (this.item instanceof RingOfHealth) {
+            set_hp(140);
+        } else {
+            set_hp(100);
+        }
+    }
+
     public void set_baseAttack(int baseAttack) {
         this.baseAttack = baseAttack;
     }
