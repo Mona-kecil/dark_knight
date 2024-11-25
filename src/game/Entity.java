@@ -1,4 +1,7 @@
+package game;
+
 public interface Entity {
-    void attack();
+    int attack();
+
     void take_damage(int damage);
 }

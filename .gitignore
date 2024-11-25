@@ -1,0 +1,12 @@
+bin/
+*.class
+
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.DS_Store
+Thumbs.db
+
+/out/

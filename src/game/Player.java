@@ -1,3 +1,5 @@
+package game;
+
 public class Player implements Entity {
     protected String name;
     protected int hp;
@@ -11,9 +13,10 @@ public class Player implements Entity {
         this.item = null;
     }
 
-    public void attack() {
+    public int attack() {
         int damage = (int) (Math.random() * this.baseAttack);
         System.out.println("You hit the enemy for " + damage + " HP");
+        return damage;
     }
 
     public void take_damage(int damage) {

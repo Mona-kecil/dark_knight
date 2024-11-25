@@ -1,3 +1,5 @@
+package game;
+
 public abstract class Enemy implements Entity {
     public int hp;
     public int baseAttack;
@@ -7,7 +9,7 @@ public abstract class Enemy implements Entity {
         this.baseAttack = baseAttack;
     }
 
-    public abstract void attack();
+    public abstract int attack();
 
     @Override
     public void take_damage(int damage) {
